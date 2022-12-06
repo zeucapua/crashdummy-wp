@@ -1,0 +1,29 @@
+---
+import '@fontsource/red-hat-display';
+---
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+        <main class="bg-neutral-900 flex flex-col w-full min-w-screen h-full min-h-screen">
+            <slot />
+        </main>
+	</body>
+</html>
+
+<style is:global>
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    @layer base {
+        html { font-family: "Red Hat Display", sans-serif; }
+    }
+
+
+</style>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostLayout from "../layouts/PostLayout.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getAllSlugs, getNodeBySlug } from "../lib/wp-api.js"; 
+
+export async function getStaticPaths() {
+    const allSlugs = await getAllSlugs(); 
+    const paths = [];
+    for (let n of allSlugs.pages.nodes) {
+        paths.push({params: {slug: n.slug}});
+    }
+    for (let n of allSlugs.posts.nodes) {
+        paths.push({params: {slug: n.slug}});
+    }
+    return paths;    
+}
+
+
+
+const slug = Astro.params.slug;
+const data = await getNodeBySlug(slug);
+const node = data.nodeByUri;
+
+function resolveLayoutFromType(node){
+    let layout;
+    switch (node.__typename) {
+        case 'Post': layout = PostLayout; break;
+        default: layout = BaseLayout; break;
+    }
+    return layout;
+}
+
+const Layout = resolveLayoutFromType(node);
+---
+
+<SiteLayout>
+    <Layout node={node}></Layout>
+</SiteLayout>

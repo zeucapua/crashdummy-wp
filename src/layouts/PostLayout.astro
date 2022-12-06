@@ -1,0 +1,7 @@
+---
+const { node } = Astro.props;
+---
+<div class="flex flex-col gap-8 h-full min-h-screen w-full xl:max-w-screen-2xl mx-auto p-16">
+    <p class="text-8xl text-yellow-400 font-['Red Hat Display'] text-center tracking-widest font-bold">{node.title}</p>
+    <article set:html={node.content} class="mx-auto prose prose-xl prose-invert"></article>
+</div>

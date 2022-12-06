@@ -1,0 +1,7 @@
+---
+const { node } = Astro.props;
+---
+
+<p>PAGE</p>
+<h1>{node.title}</h1>
+<article set:html={node.content} class="prose"></article>
